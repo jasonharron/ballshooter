@@ -73,8 +73,8 @@ planeGroup.name = "Plane Group";
 let occlusionGroup = new THREE.Group();
 occlusionGroup.name = "Occlusion Group";
 
-      //////// Hand controls
-      let hand1, hand2;
+//////// Hand controls
+let hand1, hand2;
 
 ////////////////////////////////////////
 //// MODIFICATIONS FROM THREEJS EXAMPLE
@@ -163,7 +163,7 @@ class XRPlanes extends Object3D {
 
           const geometry = new THREE.BoxGeometry(width, 0.0001, height);
           //  let material = new THREE.ShadowMaterial({ color: 0x444444 });
-/*
+          /*
           const material = new THREE.MeshLambertMaterial({
             color: 0x75d2e0, //0xffffff * Math.random(),
             transparent: true,
@@ -172,14 +172,14 @@ class XRPlanes extends Object3D {
             //wireframeLinewidth: 3,
           });
 */
-          
+
           const material = new THREE.ShadowMaterial({
             color: 0x444444,
             transparent: true,
             opacity: 0.6,
           });
 
-/*
+          /*
            if (planeGroup.children.length === 1) {
             material.color.set(0, 1, 0);
           } else if (planeGroup.children.length === 2) {
@@ -423,7 +423,7 @@ function init() {
   // order to match the orientation of the held device.
 
   const controllerModelFactory = new XRControllerModelFactory();
-          const handModelFactory = new XRHandModelFactory();
+  const handModelFactory = new XRHandModelFactory();
 
   controllerGrip1 = renderer.xr.getControllerGrip(0);
   controllerGrip1.add(
@@ -436,29 +436,29 @@ function init() {
     controllerModelFactory.createControllerModel(controllerGrip2)
   );
   scene.add(controllerGrip2);
-  
-          hand1 = renderer.xr.getHand(0);
-        hand1.addEventListener("pinchstart", onSelectStart);
-        hand1.addEventListener("pinchend", onSelectEnd);
-        hand1.add(handModelFactory.createHandModel(hand1));
 
-        scene.add(hand1);
+  hand1 = renderer.xr.getHand(0);
+  hand1.addEventListener("pinchstart", onSelectStart);
+  hand1.addEventListener("pinchend", onSelectEnd);
+  hand1.add(handModelFactory.createHandModel(hand1));
 
-        hand2 = renderer.xr.getHand(1);
-        hand2.addEventListener("pinchstart", onSelectStart);
-        hand2.addEventListener("pinchend", onSelectEnd);
-        hand2.add(handModelFactory.createHandModel(hand2));
-  
-        scene.add(hand2);
+  scene.add(hand1);
+
+  hand2 = renderer.xr.getHand(1);
+  hand2.addEventListener("pinchstart", onSelectStart);
+  hand2.addEventListener("pinchend", onSelectEnd);
+  hand2.add(handModelFactory.createHandModel(hand2));
+
+  scene.add(hand2);
 
   scene.add(meshGroup);
   scene.add(planeGroup);
   scene.add(lineGroup);
   scene.add(occlusionGroup);
-  
-            meshGroup.visible = !meshGroup.visible;
-          lineGroup.visible = !lineGroup.visible;
-          planeGroup.visible = !planeGroup.visible;
+
+  meshGroup.visible = !meshGroup.visible;
+  lineGroup.visible = !lineGroup.visible;
+  planeGroup.visible = !planeGroup.visible;
 
   // Mesh-detection
   updateState();
@@ -856,11 +856,15 @@ function checkForXR() {
                 //"mesh-detection",
                 "plane-detection",
                 "local-floor",
-                              "hand-tracking",
+                "hand-tracking",
               ],
               optionalFeatures: ["mesh-detection", 
-                                 //"depth-sensing"
+                                // "depth-sensing"
                                 ],
+             // depthSensing: {
+             //   usagePreference: ["gpu-optimized"],
+             //   dataFormatPreference: [],
+             // },
             })
           );
         } else {

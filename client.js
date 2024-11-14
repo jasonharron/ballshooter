@@ -4,7 +4,7 @@ import { BoxLineGeometry } from "/BoxLineGeometry.js";
 import { XRButton } from "/webxr/XRButton.js";
 import { ARButton } from "/ARButton.js";
 import { XRControllerModelFactory } from "/XRControllerModelFactory.js";
-import { OrbitControls } from "https://unpkg.com/three@0.169.0/examples/jsm/controls/OrbitControls.js";
+import { OrbitControls } from "/OrbitControls.js";
 
 import { BoxGeometry, Matrix4, Mesh, MeshBasicMaterial, Object3D } from "three";
 

@@ -35,9 +35,12 @@ class XRButton {
 			button.style.display = '';
 
 			button.style.cursor = 'pointer';
-			button.style.left = 'calc(50% - 50px)';
-			button.style.width = '100px';
-
+			button.style.left = 'calc(50% - 75px)';
+			button.style.width = '150px';
+      button.style.backgroundColor = 'blue'; // Set background color to blue
+button.style.color = 'white'; // Optional: set text color to white for contrast
+button.style.fontSize = '18px'; // Set a larger font size
+      
 			button.textContent = 'START XR';
 
 			const sessionOptions = {

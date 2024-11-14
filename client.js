@@ -2,7 +2,7 @@ import * as THREE from "three";
 
 import { BoxLineGeometry } from "/BoxLineGeometry.js";
 import { XRButton } from "/webxr/XRButton.js";
-import { ARButton } from "/ARButton.js";
+//import { ARButton } from "/ARButton.js";
 import { XRControllerModelFactory } from "/XRControllerModelFactory.js";
 import { OrbitControls } from "/OrbitControls.js";
 
@@ -71,6 +71,9 @@ let planeGroup = new THREE.Group();
 planeGroup.name = "Plane Group";
 let occlusionGroup = new THREE.Group();
 occlusionGroup.name = "Occlusion Group";
+
+      //////// Hand controls
+      let hand1, hand2;
 
 ////////////////////////////////////////
 //// MODIFICATIONS FROM THREEJS EXAMPLE
@@ -419,6 +422,7 @@ function init() {
   // order to match the orientation of the held device.
 
   const controllerModelFactory = new XRControllerModelFactory();
+          const handModelFactory = new XRHandModelFactory();
 
   controllerGrip1 = renderer.xr.getControllerGrip(0);
   controllerGrip1.add(
@@ -431,6 +435,20 @@ function init() {
     controllerModelFactory.createControllerModel(controllerGrip2)
   );
   scene.add(controllerGrip2);
+  
+          hand1 = renderer.xr.getHand(0);
+        hand1.addEventListener("pinchstart", onPinchStartLeft);
+        hand1.addEventListener("pinchend", onPinchEndLeft);
+        hand1.add(handModelFactory.createHandModel(hand1));
+
+        scene.add(hand1);
+
+        hand2 = renderer.xr.getHand(1);
+        hand2.addEventListener("pinchstart", onPinchStartRight);
+        hand2.addEventListener("pinchend", onPinchEndRight);
+        hand2.add(handModelFactory.createHandModel(hand2));
+  
+        scene.add(hand2);
 
   scene.add(meshGroup);
   scene.add(planeGroup);
@@ -441,7 +459,7 @@ function init() {
   updateState();
 
   window.addEventListener("keydown", (event) => {
-    saveScene(event);
+    //saveScene(event);
   });
 
   window.addEventListener("resize", onWindowResize);
@@ -827,12 +845,13 @@ function checkForXR() {
           userArray[0].vr = 1;
           console.log("VR Supported");
           document.body.appendChild(
-            ARButton.createButton(renderer, {
+            XRButton.createButton(renderer, {
               requiredFeatures: [
                 "hit-test",
                 //"mesh-detection",
                 "plane-detection",
                 "local-floor",
+                              "hand-tracking",
               ],
               optionalFeatures: ["mesh-detection", 
                                  //"depth-sensing"
@@ -855,7 +874,7 @@ function checkForXR() {
                 userArray[0].xr = 1;
                 console.log("No XR Support");
                 document.body.appendChild(
-                  ARButton.createButton(renderer, {
+                  XRButton.createButton(renderer, {
                     requiredFeatures: ["hit-test", "plane-detection", "local"],
                   })
                 );
@@ -1291,10 +1310,10 @@ function dollyMove() {
           old.buttons[5] == 0 &&
           data.handedness == "left"
         ) {
-          meshGroup.visible = true;
-          lineGroup.visible = true;
-          planeGroup.visible = true;
-          exportScene();
+          //meshGroup.visible = true;
+          //lineGroup.visible = true;
+          //planeGroup.visible = true;
+          //exportScene();
         }
 
         if (old) {

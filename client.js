@@ -5,6 +5,7 @@ import { XRButton } from "/webxr/XRButton.js";
 //import { ARButton } from "/ARButton.js";
 import { XRControllerModelFactory } from "/XRControllerModelFactory.js";
 import { OrbitControls } from "/OrbitControls.js";
+import { XRHandModelFactory } from "/webxr/XRHandModelFactory.js";
 
 import { BoxGeometry, Matrix4, Mesh, MeshBasicMaterial, Object3D } from "three";
 
@@ -437,15 +438,15 @@ function init() {
   scene.add(controllerGrip2);
   
           hand1 = renderer.xr.getHand(0);
-        hand1.addEventListener("pinchstart", onPinchStartLeft);
-        hand1.addEventListener("pinchend", onPinchEndLeft);
+        hand1.addEventListener("pinchstart", onSelectStart);
+        hand1.addEventListener("pinchend", onSelectEnd);
         hand1.add(handModelFactory.createHandModel(hand1));
 
         scene.add(hand1);
 
         hand2 = renderer.xr.getHand(1);
-        hand2.addEventListener("pinchstart", onPinchStartRight);
-        hand2.addEventListener("pinchend", onPinchEndRight);
+        hand2.addEventListener("pinchstart", onSelectStart);
+        hand2.addEventListener("pinchend", onSelectEnd);
         hand2.add(handModelFactory.createHandModel(hand2));
   
         scene.add(hand2);

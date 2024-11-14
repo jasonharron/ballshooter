@@ -1,10 +1,10 @@
 import * as THREE from "three";
 
-import { BoxLineGeometry } from "three/addons/geometries/BoxLineGeometry.js";
-import { XRButton } from "three/addons/webxr/XRButton.js";
+import { BoxLineGeometry } from "/BoxLineGeometry.js";
+import { XRButton } from "/webxr/XRButton.js";
 import { ARButton } from "/ARButton.js";
-import { XRControllerModelFactory } from "three/addons/webxr/XRControllerModelFactory.js";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { XRControllerModelFactory } from "/XRControllerModelFactory.js";
+import { OrbitControls } from "https://unpkg.com/three@0.169.0/examples/jsm/controls/OrbitControls.js";
 
 import { BoxGeometry, Matrix4, Mesh, MeshBasicMaterial, Object3D } from "three";
 

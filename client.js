@@ -455,6 +455,10 @@ function init() {
   scene.add(planeGroup);
   scene.add(lineGroup);
   scene.add(occlusionGroup);
+  
+            meshGroup.visible = !meshGroup.visible;
+          lineGroup.visible = !lineGroup.visible;
+          planeGroup.visible = !planeGroup.visible;
 
   // Mesh-detection
   updateState();
@@ -813,7 +817,7 @@ function render(timestamp, frame) {
       if (hitTestResults.length) {
         const hit = hitTestResults[0];
 
-        reticle.visible = true;
+        reticle.visible = false;
         reticle.matrix.fromArray(hit.getPose(referenceSpace).transform.matrix);
         if (calibrationMode) {
           reticle.material.color.setHex(0xff0000);
